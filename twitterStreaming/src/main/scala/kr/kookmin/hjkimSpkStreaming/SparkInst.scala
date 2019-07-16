@@ -35,9 +35,9 @@ object SparkInst{
   private def parseKey(args: Array[String]): Array[String] = {
     var consumer_pubKey: String = ""
     var consumer_secKey: String = ""
-    var AccessToken_pub: String = ""
-    var AccessToken_sec: String = ""
+    var accessToken_pub: String = ""
+    var accessToken_sec: String = ""
 
-    return (consumer_secKey, consumer_secKey, AccessToken_pub, AccessToken_sec)
+    return Array(consumer_pubKey, consumer_secKey, accessToken_pub, accessToken_sec)
   }
 }
