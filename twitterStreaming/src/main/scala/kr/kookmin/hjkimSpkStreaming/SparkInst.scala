@@ -39,7 +39,7 @@ object SparkInst{
 
   }
 
-  private def wordCount_Example(ssc): Unit = {
+  private def wordCount_Example(ssc: Unit): Unit = {
     var lines = ssc.socketTextStream("10.160.0.4", 9999);
     var words = lines.flatMap(_.split(" "));
 
