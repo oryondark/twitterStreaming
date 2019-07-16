@@ -2,9 +2,9 @@ package kr.kookmin.hjkimSpkStreaming
 import twitter4j.TwitterFactory
 import twitter4j.auth.AccessToken
 
-import org.apache.spark.streaming._
-import org.apache.spark.streaming.StreamingContext._
-import org.apache.spark.api.java.function._
+import org.apache.spark.SparkConf
+import org.apache.spark.storage.StorageLevel
+import org.apache.spark.streaming.{Seconds, StreamingContext}
 
 
 object SparkInst{
@@ -13,12 +13,13 @@ object SparkInst{
   Please, inputs the arguments keys to access your twitter.
   */
   def main(args: Array[String]): Unit = {
-
+    StreamingExamples.setStreamingLogLevels()
     var keys = parseKey(args);
     println(keys.mkString(","));
 
     //Spark Streaming Context
-    var ssc = new StreamingContext("10.160.0.4", "NetworkWordCount", Seconds(1));
+    val sparkConf = new SparkConf().setAppName("NetworkWordCount")
+    var ssc = new StreamingContext(sparkConf, Seconds(1));
     wordCount_Example(ssc);
     ssc.start();
     ssc.awaitTermination();
@@ -40,13 +41,13 @@ object SparkInst{
   }
 
   private def wordCount_Example(ssc: StreamingContext): Unit = {
-    var lines = ssc.socketTextStream("10.160.0.4", 9999);
+    var lines = ssc.socketTextStream("10.160.0.4", 9999, StorageLevel.MEMORY_AND_DISK_SER);
     var words = lines.flatMap(_.split(" "));
 
     var pairs = words.map(word => (word, 1));
     var wordCounts = pairs.reduceByKey(_ + _);
-
     wordCounts.print();
+    
   }
 
   private def parseKey(args: Array[String]): Array[String] = {
