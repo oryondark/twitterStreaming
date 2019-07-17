@@ -2,9 +2,10 @@ package kr.kookmin.hjkimSpkStreaming
 import twitter4j.TwitterFactory
 import twitter4j.auth.AccessToken
 
-import org.apache.spark.SparkConf._
 import org.apache.spark.storage.StorageLevel
-import org.apache.spark.streaming.{Seconds, StreamingContext}
+import org.apache.spark._
+import org.apache.spark.streaming._
+import org.apache.spark.streaming.StreamingContext._ 
 
 
 object SparkInst{
