@@ -22,7 +22,7 @@ object SparkInst{
     argument1 argument2
   */
   def main(args: Array[String]): Unit = {
-    StreamingExamples.setStreamingLogLevels()
+    //StorageLevel.setStreamingLogLevels()
     var keys = parseKey(args);
     println(keys.mkString(","));
 
