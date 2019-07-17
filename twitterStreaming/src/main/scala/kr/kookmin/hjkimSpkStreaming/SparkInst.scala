@@ -2,7 +2,7 @@ package kr.kookmin.hjkimSpkStreaming
 import twitter4j.TwitterFactory
 import twitter4j.auth.AccessToken
 
-import org.apache.spark.SparkConf
+import org.apache.spark.SparkConf._
 import org.apache.spark.storage.StorageLevel
 import org.apache.spark.streaming.{Seconds, StreamingContext}
 
@@ -11,6 +11,14 @@ object SparkInst{
   /*
   Spark Streaming Usage:
   Please, inputs the arguments keys to access your twitter.
+
+
+  Usage:
+  ./bin/spark-submit \
+    --class kr.kookmin.hjkimSpkStreaming.SparkInst \
+    --master local[0]
+    /path/to/your/app
+    argument1 argument2
   */
   def main(args: Array[String]): Unit = {
     StreamingExamples.setStreamingLogLevels()
@@ -47,7 +55,7 @@ object SparkInst{
     var pairs = words.map(word => (word, 1));
     var wordCounts = pairs.reduceByKey(_ + _);
     wordCounts.print();
-    
+
   }
 
   private def parseKey(args: Array[String]): Array[String] = {
