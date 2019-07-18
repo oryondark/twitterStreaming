@@ -70,8 +70,8 @@
     </dependency>
     <dependency>
       <groupId>org.scalatest</groupId>
-      <artifactId>scalatest_2.11.8</artifactId>
-      <version>3.0.0</version>
+      <artifactId>scalatest_${scala.compat.version}</artifactId>
+      <version>3.0.5</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -103,7 +103,7 @@
 			    <archive>
 				    <manifest>
 					    <addClasspath>true</addClasspath>
-					    <mainClass>kr.kookmin.hjkimSpkStreaming.SparkInst</mainClass>
+					    <mainClass>kr.kookmin.hjkimSpkStreaming.scalaTest</mainClass>
 					    <classpathPrefix>dependency-myJars/</classpathPrefix>
 				    </manifest>
 			    </archive>
